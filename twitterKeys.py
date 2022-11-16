@@ -1,0 +1,9 @@
+
+
+apiKey = 'LkOfRhgYayDO6gdHAjNzS1yri'
+apiSecret= '0dgGBaeMOk8xLRagUZUTu8M5CLJU6lgT6LIuaq7WCB2cqImz45'
+
+bearerToken= 'AAAAAAAAAAAAAAAAAAAAANUdjQEAAAAA4qd4boluQs9QfIn86A80CBC5GNo%3DUftyn7K1mMZ65fYelK7mAwPQYv3'
+
+accessToken = '1591860698862198785-W3sEjpYtwwhr7tqv7vTpQu0uo2X3Ag'
+accessSecret = 'CqPdiRtSCAWnu3yJyQBpcuI7DuvhA43lFPiYTI7QM1pLc'
