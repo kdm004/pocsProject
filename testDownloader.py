@@ -63,7 +63,7 @@ emoticons_sad = set([
     ':c', ':{', '>:\\', ';('
     ])
 
-#Emoji patterns
+#Emoji patterns, don't remove them, just define them?
 emoji_pattern = re.compile("["
          u"\U0001F600-\U0001F64F"  # emoticons
          u"\U0001F300-\U0001F5FF"  # symbols & pictographs

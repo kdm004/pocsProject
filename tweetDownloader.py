@@ -7,6 +7,11 @@ import csv
 from itertools import chain
 import pandas as pd
 import numpy as np
+import re
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import string
+
 
 # Check Tweepy Version Installed
 #print(tweepy.__version__)
@@ -32,57 +37,113 @@ tweets = client.search_all_tweets(query=query, tweet_fields=['context_annotation
                                   
                                   place_fields = ['place_type','geo'], expansions='geo.place_id',
                                   start_time=start_time,
-                                  end_time=end_time, max_results=50)
+                                  end_time=end_time, max_results=100)
 
 
-
-
-# Prepare to write to csv file
-f = open('tweetSheet.csv','w')
-writer = csv.writer(f)
-
-# Write to csv file
-for tweet in tweets.data:
-    print(tweet.text)
-    print(tweet.created_at)
-    writer.writerow(['0', tweet.id, tweet.created_at, tweet.text])
-
-# Close csv file
-f.close()
-
-# # Let's order this into a dataframe, and then put it into a csv. 
 
 #-------------------------------------------------------------------------------------------------------------------------------
 
 
+#-------------------------------------------------------------------------------------------------------------------------------
+# Clean tweets
+
+#HappyEmoticons
+emoticons_happy = set([
+    ':-)', ':)', ';)', ':o)', ':]', ':3', ':c)', ':>', '=]', '8)', '=)', ':}',
+    ':^)', ':-D', ':D', '8-D', '8D', 'x-D', 'xD', 'X-D', 'XD', '=-D', '=D',
+    '=-3', '=3', ':-))', ":'-)", ":')", ':*', ':^*', '>:P', ':-P', ':P', 'X-P',
+    'x-p', 'xp', 'XP', ':-p', ':p', '=p', ':-b', ':b', '>:)', '>;)', '>:-)',
+    '<3'
+    ])
+
+# Sad Emoticons
+emoticons_sad = set([
+    ':L', ':-/', '>:/', ':S', '>:[', ':@', ':-(', ':[', ':-||', '=L', ':<',
+    ':-[', ':-<', '=\\', '=/', '>:(', ':(', '>.<', ":'-(", ":'(", ':\\', ':-c',
+    ':c', ':{', '>:\\', ';('
+    ])
+
+#Emoji patterns, don't remove them, just define them?
+emoji_pattern = re.compile("["
+         u"\U0001F600-\U0001F64F"  # emoticons
+         u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+         u"\U0001F680-\U0001F6FF"  # transport & map symbols
+         u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+         u"\U00002702-\U000027B0"
+         u"\U000024C2-\U0001F251"
+         "]+", flags=re.UNICODE)
+
+#combine sad and happy emoticons
+emoticons = emoticons_happy.union(emoticons_sad)
+
+def clean_tweets(tweet):     
+    stop_words = set(stopwords.words('english'))
+    word_tokens = word_tokenize(tweet)
+    #after tweepy preprocessing the colon symbol left remain after removing mentions
+    tweet = re.sub(r':', '', tweet)
+    tweet = re.sub(r'‚Ä¶', '', tweet)
+    #replace consecutive non-ASCII characters with a space
+    tweet = re.sub(r'[^\x00-\x7F]+',' ', tweet)
+    #remove emojis from tweet
+    tweet = emoji_pattern.sub(r'', tweet)
+    #filter using NLTK library append it to a string
+    filtered_tweet = [w for w in word_tokens if not w in stop_words]
+    filtered_tweet = []
+    #looping through conditions
+    for w in word_tokens:
+        #check tokens against stop words , emoticons and punctuations
+        if w not in stop_words and w not in emoticons and w not in string.punctuation:
+            filtered_tweet.append(w)
+    fresh_tweet = ' '.join(filtered_tweet)
+
+    return fresh_tweet
+#-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+# Append tweet information to lists
+sentiment_list = []
+id_list = []
+created_at_list = []
+text_list = []
+for tweet in tweets.data:
+    sentiment_list.append('0')
+    id_list.append(tweet.id)
+    created_at_list.append(tweet.created_at)
+    text_list.append(tweet.text)
+
+# Append clean Tweets to a list by calling method on each one
+clean_tweet_list = []
+for entry in text_list:
+    clean_tweet_list.append(clean_tweets(entry))
+
+
+tweet_dic = {'sentiment':sentiment_list, 'id':id_list, 'date':created_at_list, 'text':clean_tweet_list}
+
+
+
+
+
+# Put tweet lists into a dictionary
+#tweet_dic = {'sentiment':sentiment_list, 'id':id_list, 'date':created_at_list, 'text':text_list}
+
+
+# Convert dictionary to dataframe
+df = pd.DataFrame(tweet_dic, columns = ['sentiment','id','date','text'])
+#df.sort_values('id')                                                       # Sorting by id will also sort from newest to oldest
+
+
+# Sort dataframe by RFC3339 date format from newest to oldest
 
 
 
 
 
 
+df.to_csv('tweetSheet1.csv', index = False)  
 
-# data = list(chain.from_iterable(tweet_count))
-# df = pd.DataFrame(data).reindex(['start', 'end', 'tweet_count'], axis=1)
-# totalCount = sum(df['tweet_count'])
-# avg = np.mean(df['tweet_count'])
-
-# #print(df)
-# print('totalcount= ',totalCount)
-# print('avg daily count= ',avg)
-
-# df.to_csv('countSheet.csv', index = False)  
-
-
-
-# data = []
-# for tweet in tweets.data:
-# df = pd.DataFrame(tweet
-# totalCount = sum(df['tweet_count'])
-# avg = np.mean(df['tweet_count'])
-
-# #print(df)
-# print('totalcount= ',totalCount)
-# print('avg daily count= ',avg)
-
-# df.to_csv('countSheet.csv', index = False)  
+# comment out csv stuff. 
+# now, you can put the lists into a dictionary
+# next, convert the dictionary into a df
+# next, sort the df by date
+# use the df to csv method.
