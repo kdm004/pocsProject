@@ -19,11 +19,11 @@ bearer_token = "AAAAAAAAAAAAAAAAAAAAAHIxjgEAAAAAHBtpIV5008WAMdj3Hd2dapo%2BM6k%3D
 client = tweepy.Client(bearer_token=bearer_token)
 
 # Replace with your own search query
-query = ' ("send them back to" OR "send him back to" OR "send her back to" OR "illegals from" OR "illegal aliens from" OR "illegal alien from" OR "illegal immigrants from" OR "illegal immigrant from" OR "illegal criminals from" OR "illegal criminal from" OR "foreign criminals from" OR "foreign criminal from" OR "illegal terrorist from" OR "sending us their criminals" OR "ban people from" OR "deport them" OR "deport people from" OR "deport all these" OR "immigrants from") place_country:US -is:retweet' 
+query = ' ("send them back to" OR "send him back to" OR "send her back to" OR "illegals from" OR "illegal aliens from" OR "illegal alien from" OR "illegal immigrants from" OR "illegal immigrant from" OR "illegal criminals from" OR "illegal criminal from" OR "foreign criminals from" OR "foreign criminal from" OR "illegal terrorist from" OR "sending us their criminals" OR "ban people from" OR "deport them" OR "deport people from" OR "deport all these" OR "immigrants from" OR "immigrants" OR "people from") place_country:US -is:retweet' 
           # Triple quotes around a quoted phrase will return the exact phrase. ['word1', 'word2'] gives Tweet with both words. 
                                                                                         # query = ' "is a shithole country" OR "is a shit hole country" place_country:US'   
 # Replace with time period of your choice
-start_time = '2022--03-05T00:00:00Z' # CHECK THE YEAR
+start_time = '2010-04-06T00:00:00Z' # CHECK THE YEAR  #paginator will not activate until 31 days is passed. 
 
 # Replace with time period of your choice
 end_time = '2022-03-11T00:00:00Z' # CHECK THE YEAR
@@ -32,7 +32,7 @@ tweets = client.search_all_tweets(query=query, tweet_fields=['context_annotation
                                   
                                   place_fields = ['place_type','geo'], expansions='geo.place_id',
                                   start_time=start_time,
-                                  end_time=end_time, max_results=100)
+                                  end_time=end_time, max_results=50)
 
 
 
@@ -75,4 +75,14 @@ f.close()
 
 
 
+# data = []
+# for tweet in tweets.data:
+# df = pd.DataFrame(tweet
+# totalCount = sum(df['tweet_count'])
+# avg = np.mean(df['tweet_count'])
 
+# #print(df)
+# print('totalcount= ',totalCount)
+# print('avg daily count= ',avg)
+
+# df.to_csv('countSheet.csv', index = False)  
