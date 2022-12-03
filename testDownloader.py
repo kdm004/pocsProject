@@ -37,7 +37,7 @@ tweets = client.search_all_tweets(query=query, tweet_fields=['context_annotation
                                   
                                   place_fields = ['place_type','geo'], expansions='geo.place_id',
                                   start_time=start_time,
-                                  end_time=end_time, max_results=50)
+                                  end_time=end_time, max_results=100)
 
 
 
