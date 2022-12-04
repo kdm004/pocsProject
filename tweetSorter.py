@@ -12,7 +12,7 @@ import string
 
 # Read files
 globe_df = pd.read_csv('countriesAndRegions.csv')
-tweets_df = pd.read_csv('tweetSheet.csv')
+tweets_df = pd.read_csv('tweetSheet3.csv')
 
 # Filter tweets for those that contain mentions of countries
 vals=globe_df.stack().to_list()
@@ -26,7 +26,7 @@ tweets_df.sort_values(['id'])  # Make sure all tweets sorted by 'id' (highest to
 print(tweets_df)
 
 # write tweets_df to a csv
-tweets_df.to_csv('tweetSheet_filtered.csv', index = False)  
+tweets_df.to_csv('tweetSheet3_filtered.csv', index = False)  
 
 
 

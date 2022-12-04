@@ -70,12 +70,12 @@ def clean_tweets(tweet):
     #remove emojis from tweet
     tweet = emoji_pattern.sub(r'', tweet)
     #filter using NLTK library append it to a string
-    filtered_tweet = [w for w in word_tokens if not w in stop_words]
+    filtered_tweet = [w for w in word_tokens]    #   filtered_tweet = [w for w in word_tokens if not w in stop_words]
     filtered_tweet = []
     #looping through conditions
     for w in word_tokens:
         #check tokens against stop words , emoticons and punctuations
-        if w not in stop_words and w not in emoticons and w not in string.punctuation:
+        if  w not in emoticons and w not in string.punctuation:    #        if w not in stop_words and w not in emoticons and w not in string.punctuation:
             filtered_tweet.append(w)
     fresh_tweet = ' '.join(filtered_tweet)
 
@@ -92,7 +92,7 @@ for tweet in tweets.data:
     created_at_list.append(tweet.created_at)
     text_list.append(tweet.text)
 
-# Append clean Tweets to a list by calling method on each one
+# Append clean Tweets to a list by calling method on each one                                       # DON'T CLEAN TWEETS UNTIL END? Don't take out stopwords for when you evaluate the tweet.
 clean_tweet_list = []
 for entry in text_list:
     clean_tweet_list.append(clean_tweets(entry))
@@ -107,5 +107,9 @@ df = pd.DataFrame(tweet_dic, columns = ['sentiment','id','date','text'])
 #df.sort_values('id')                                                       # Sorting by id will also sort from newest to oldest
 
 
-df.to_csv('tweetSheet.csv', index = False)  
+df.to_csv('tweetSheet3.csv', index = False)  
 
+#-------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
+# I have edited this file to not remove stopwords. You can replace the lines with the commented our ones to remove them once again if that's necessary.
