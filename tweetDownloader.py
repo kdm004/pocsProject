@@ -15,18 +15,15 @@ import string
 #-------------------------------------------------------------------------------------------------------------------------------
 # Store bearer_token in variable
 bearer_token = "AAAAAAAAAAAAAAAAAAAAAHIxjgEAAAAAHBtpIV5008WAMdj3Hd2dapo%2BM6k%3DGfV9iH7qSwlBf8UQcODVI6DW0FaoIT6tfodr38XcVR018cGh6v"
-client = tweepy.Client(bearer_token=bearer_token)
+client = tweepy.Client(bearer_token=bearer_token, wait_on_rate_limit=True)
 # Replace with your own search query
 query = ' ("send them back to" OR "send him back to" OR "send her back to" OR "illegals from" OR "illegal aliens from" OR "illegal alien from" OR "illegal immigrants from" OR "illegal immigrant from" OR "illegal criminals from" OR "illegal criminal from" OR "foreign criminals from" OR "foreign criminal from" OR "illegal terrorist from" OR "sending us their criminals" OR "ban people from" OR "deport them" OR "deport people from" OR "deport all these" OR "immigrants from" OR "immigrants" OR "people from") place_country:US -is:retweet' 
 # Replace with time period of your choice
 start_time = '2010-04-06T00:00:00Z' # CHECK THE YEAR  #paginator will not activate until 31 days is passed. 
 # Replace with time period of your choice
-end_time = '2022-03-11T00:00:00Z' # CHECK THE YEAR
-tweets = client.search_all_tweets(query=query, tweet_fields=['context_annotations', 'created_at', 'geo'], # Do I need context_annotations?
-                                
-                                  place_fields = ['place_type','geo'], expansions='geo.place_id',
-                                  start_time=start_time,
-                                  end_time=end_time, max_results=100)
+end_time = '2022-12-01T00:00:00Z' # CHECK THE YEAR
+tweets = tweepy.Paginator(client.search_all_tweets, query=query,
+                              tweet_fields=['created_at'], start_time = start_time, end_time = end_time, max_results=100).flatten(limit=300)
 #-------------------------------------------------------------------------------------------------------------------------------
 # Clean tweets
 
@@ -86,7 +83,7 @@ sentiment_list = []
 id_list = []
 created_at_list = []
 text_list = []
-for tweet in tweets.data:
+for tweet in tweets:
     sentiment_list.append('0')
     id_list.append(tweet.id)
     created_at_list.append(tweet.created_at)
@@ -107,7 +104,7 @@ df = pd.DataFrame(tweet_dic, columns = ['sentiment','id','date','text'])
 #df.sort_values('id')                                                       # Sorting by id will also sort from newest to oldest
 
 
-df.to_csv('tweetSheet3.csv', index = False)  
+df.to_csv('trainingTweets.csv', index = False)  
 
 #-------------------------------------------------------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------------------------------------------------------
