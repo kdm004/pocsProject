@@ -11,6 +11,7 @@ import re
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import string
+import time
 
 #-------------------------------------------------------------------------------------------------------------------------------
 # Store bearer_token in variable
@@ -19,11 +20,11 @@ client = tweepy.Client(bearer_token=bearer_token, wait_on_rate_limit=True)
 # Replace with your own search query
 query = ' ("send them back to" OR "send him back to" OR "send her back to" OR "illegals from" OR "illegal aliens from" OR "illegal alien from" OR "illegal immigrants from" OR "illegal immigrant from" OR "illegal criminals from" OR "illegal criminal from" OR "foreign criminals from" OR "foreign criminal from" OR "illegal terrorist from" OR "sending us their criminals" OR "ban people from" OR "deport them" OR "deport people from" OR "deport all these" OR "immigrants from" OR "immigrants" OR "people from") place_country:US -is:retweet' 
 # Replace with time period of your choice
-start_time = '2010-04-06T00:00:00Z' # CHECK THE YEAR  #paginator will not activate until 31 days is passed. 
+start_time = '2010-04-06T00:00:00Z' 
 # Replace with time period of your choice
-end_time = '2022-12-01T00:00:00Z' # CHECK THE YEAR
+end_time = '2022-12-03T00:00:00Z' 
 tweets = tweepy.Paginator(client.search_all_tweets, query=query,
-                              tweet_fields=['created_at'], start_time = start_time, end_time = end_time, max_results=100).flatten(limit=300)
+                              tweet_fields=['created_at'], start_time = start_time, end_time = end_time, max_results=100).flatten(limit=1000)
 #-------------------------------------------------------------------------------------------------------------------------------
 # Clean tweets
 
@@ -88,6 +89,7 @@ for tweet in tweets:
     id_list.append(tweet.id)
     created_at_list.append(tweet.created_at)
     text_list.append(tweet.text)
+    time.sleep(1)
 
 # Append clean Tweets to a list by calling method on each one                                       # DON'T CLEAN TWEETS UNTIL END? Don't take out stopwords for when you evaluate the tweet.
 clean_tweet_list = []
@@ -100,10 +102,10 @@ tweet_dic = {'sentiment':sentiment_list, 'id':id_list, 'date':created_at_list, '
 # Convert dictionary to dataframe
 df = pd.DataFrame(tweet_dic, columns = ['sentiment','id','date','text'])
 
-
-#df.sort_values('id')                                                       # Sorting by id will also sort from newest to oldest
-
-
+print(df)
+df.sort_values('id')                                                       # Sorting by id will also sort from newest to oldest
+print('--------------------HelloThere!---------------------')
+print(df)
 df.to_csv('trainingTweets.csv', index = False)  
 
 #-------------------------------------------------------------------------------------------------------------------------------

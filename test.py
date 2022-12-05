@@ -4,44 +4,25 @@
 import tweepy
 import json
 import csv
+from itertools import chain
+import pandas as pd
+import numpy as np
+import re
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import string
+import time
 
 
-# Check Tweepy Version Installed
-print(tweepy.__version__)
+bearer_token = "AAAAAAAAAAAAAAAAAAAAAHIxjgEAAAAAHBtpIV5008WAMdj3Hd2dapo%2BM6k%3DGfV9iH7qSwlBf8UQcODVI6DW0FaoIT6tfodr38XcVR018cGh6v"
 
-
-# Store bearer_token in variable
-bearer_token = "Input Bearer Token Here"
-
-
-client = tweepy.Client(bearer_token=bearer_token)
+client = tweepy.Client(bearer_token=bearer_token, wait_on_rate_limit=True)
 
 # Replace with your own search query
-query = ' "Qatar" "Beer" place_country:US'           
+query = 'covid -is:retweet'
 
-# Replace with time period of your choice
-start_time = '2021-11-20T00:00:00Z'
-
-# Replace with time period of your choice
-end_time = '2022-11-20T00:00:00Z'
-
-tweets = client.search_all_tweets(query=query, tweet_fields=['context_annotations', 'created_at', 'geo'], 
-                                  
-                                  place_fields = ['place_type','geo'], expansions='geo.place_id',
-                                  start_time=start_time,
-                                  end_time=end_time, max_results=100000)
-
-
-
-# Prepare to write to csv file
-f = open('tweetData.csv','w')
-writer = csv.writer(f)
-
-# Write to csv file
-for tweet in tweets.data:
-    print(tweet.text)
-    print(tweet.created_at)
-    writer.writerow(['0', tweet.id, tweet.created_at, tweet.text])
-
-# Close csv file
-f.close()
+# Replace the limit=1000 with the maximum number of Tweets you want
+for tweet in tweepy.Paginator(client.search_all_tweets, query=query,
+                              tweet_fields=['context_annotations', 'created_at'], max_results=100).flatten(limit=1000):
+    print(tweet.id)
+    time.sleep(1)
