@@ -9,6 +9,8 @@ import re
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import string
+from fuzzywuzzy import fuzz
+
 
 # Read in files to dataFrames
 globe_df = pd.read_csv('fuzzyCountriesAndRegions.csv')
@@ -60,13 +62,43 @@ df_MENA = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
 df_pacific = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
 df_southAsia = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
 df_Subafrica = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
-
+#--------------------------------------------------------------------------------------------
 
 for tweetIndex in range(len(tweets_df['text'])):
     list_of_substrings = [tweets_df['text'][tweetIndex][i: j] for i in range(len(tweets_df['text'][tweetIndex]))        # Overwrite list_of_substrings with substrings of next Tweet
           for j in range(i + 1, len(tweets_df['text'][tweetIndex]) + 1)]
 
+# BLOCK A
+    for substring in list_of_substrings:
+        for globeIndex in range(len(globe_df['Country'])):
+            if fuzz.token_set_ratio(substring, globe_df['Country'][globeIndex]) >= .90:
+# BLOCK B
+                if globe_df['Region'][globeIndex] == 'Americas':
+                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+               
+                if globe_df['Region'][globeIndex] == 'Central Asia':
+                    df_americas.append(tweets_df.iloc[[tweetIndex]])
 
+                if globe_df['Region'][globeIndex] == 'East Asia':
+                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+
+                if globe_df['Region'][globeIndex] == 'Europe':
+                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+
+                if globe_df['Region'][globeIndex] == 'Indian Subcontinent':
+                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+
+                if globe_df['Region'][globeIndex] == 'MENA':
+                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+
+                if globe_df['Region'][globeIndex] == 'Pacific':
+                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+
+                if globe_df['Region'][globeIndex] == 'South Asia':
+                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+
+                if globe_df['Region'][globeIndex] == 'Sub-Saharan Africa':
+                    df_americas.append(tweets_df.iloc[[tweetIndex]])
 
 # BLOCK A
     # for entry in list_of_substrings:
