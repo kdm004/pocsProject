@@ -31,27 +31,6 @@ print(globe_df)
 
 
 
-#----------------------------------------------------------------------------------------------
-# # if (word contained by tweet_text has a fuzzywuzzy score of .90 when compared to country_entry):
-#       if country_region is Europe:
-#               append tweet to df_Europe
-# Repeat for each region
-#----------------------------------------------------------------------------------------------
-
-# Get all substrings of string
-# Using list comprehension + string slicing
-list_of_substrings = [tweet_text[i: j] for i in range(len(tweet_text))
-          for j in range(i + 1, len(tweet_text) + 1)]
-#----------------------------------------------------------------------------------------------
-# if { (entry in list_of_substrings) vs (country_entry) } has a fuzzywuzzy score of >= .90:
-# if country_region is Europe:
-#                append tweet to df_europe
-# if country_region is Americas:
-#                append tweet to df_americas
-# if country_region is Sub-Saharan Africa:
-#                append tweet to df_subAfrica
-
-
 # initialize region dataframes
 df_americas = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
 df_centralAsia = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
@@ -61,44 +40,53 @@ df_indianSub = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
 df_MENA = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
 df_pacific = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
 df_southAsia = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
-df_Subafrica = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
+df_subAfrica = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
 #--------------------------------------------------------------------------------------------
 
+# For each tweet, get the substrings and...
 for tweetIndex in range(len(tweets_df['text'])):
     list_of_substrings = [tweets_df['text'][tweetIndex][i: j] for i in range(len(tweets_df['text'][tweetIndex]))        # Overwrite list_of_substrings with substrings of next Tweet
           for j in range(i + 1, len(tweets_df['text'][tweetIndex]) + 1)]
 
-# BLOCK A
+# For each substring in a tweet, compare it to an entry in the 'Country' column, and add it to a dataframe if the match is >= .90
     for substring in list_of_substrings:
         for globeIndex in range(len(globe_df['Country'])):
             if fuzz.token_set_ratio(substring, globe_df['Country'][globeIndex]) >= .90:
-# BLOCK B
+
+# Add Tweet info to dataframe if it mentions this country or region
                 if globe_df['Region'][globeIndex] == 'Americas':
                     df_americas.append(tweets_df.iloc[[tweetIndex]])
                
                 if globe_df['Region'][globeIndex] == 'Central Asia':
-                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+                    df_centralAsia.append(tweets_df.iloc[[tweetIndex]])
 
                 if globe_df['Region'][globeIndex] == 'East Asia':
-                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+                    df_eastAsia.append(tweets_df.iloc[[tweetIndex]])
 
                 if globe_df['Region'][globeIndex] == 'Europe':
-                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+                    df_europe.append(tweets_df.iloc[[tweetIndex]])
 
                 if globe_df['Region'][globeIndex] == 'Indian Subcontinent':
-                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+                    df_indianSub.append(tweets_df.iloc[[tweetIndex]])
 
                 if globe_df['Region'][globeIndex] == 'MENA':
-                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+                    df_MENA.append(tweets_df.iloc[[tweetIndex]])
 
                 if globe_df['Region'][globeIndex] == 'Pacific':
-                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+                    df_pacific.append(tweets_df.iloc[[tweetIndex]])
 
                 if globe_df['Region'][globeIndex] == 'South Asia':
-                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+                    df_southAsia.append(tweets_df.iloc[[tweetIndex]])
 
                 if globe_df['Region'][globeIndex] == 'Sub-Saharan Africa':
-                    df_americas.append(tweets_df.iloc[[tweetIndex]])
+                    df_subAfrica.append(tweets_df.iloc[[tweetIndex]])
+
+# Sort each dataframe by id so it's in order of newest to oldest tweets
+# reset the dataframe indices
+
+
+
+    
 
 # BLOCK A
     # for entry in list_of_substrings:
