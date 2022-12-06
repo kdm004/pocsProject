@@ -18,7 +18,7 @@ import time
 bearer_token = "AAAAAAAAAAAAAAAAAAAAAHIxjgEAAAAAHBtpIV5008WAMdj3Hd2dapo%2BM6k%3DGfV9iH7qSwlBf8UQcODVI6DW0FaoIT6tfodr38XcVR018cGh6v"
 client = tweepy.Client(bearer_token=bearer_token, wait_on_rate_limit=True)
 # Replace with your own search query
-query = ' ("send them back to" OR "send him back to" OR "send her back to" OR "illegals from" OR "illegal aliens from" OR "illegal alien from" OR "illegal immigrants from" OR "illegal immigrant from" OR "illegal criminals from" OR "illegal criminal from" OR "foreign criminals from" OR "foreign criminal from" OR "illegal terrorist from" OR "sending us their criminals" OR "ban people from" OR "deport them" OR "deport people from" OR "deport all these" OR "immigrants from" OR "immigrants" OR "people from") place_country:US -is:retweet' 
+query = ' ("send them back to" OR "send him back to" OR "send her back to" OR "illegals from" OR "illegal aliens from" OR "illegal alien from" OR "illegal immigrants from" OR "illegal immigrant from" OR "illegal criminals from" OR "illegal criminal from" OR "foreign criminals from" OR "foreign criminal from" OR "illegal terrorist from" OR "sending us their criminals" OR "ban people from" OR "deport them" OR "deport people from" OR "deport all these" OR "immigrants from" OR "invading our country" OR "being invaded" OR "invaders" OR "immigrants") place_country:US -is:retweet' 
 # Replace with time period of your choice
 start_time = '2010-04-06T00:00:00Z' 
 # Replace with time period of your choice
@@ -73,7 +73,7 @@ def clean_tweets(tweet):
     #looping through conditions
     for w in word_tokens:
         #check tokens against stop words , emoticons and punctuations
-        if  w not in emoticons and w not in string.punctuation:    #        if w not in stop_words and w not in emoticons and w not in string.punctuation:
+        if  w not in emoticons and w not in string.punctuation:    #        if w not in stop_words and w not in emoticons and w not in string.punctuation: (Doesn't work well.)
             filtered_tweet.append(w)
     fresh_tweet = ' '.join(filtered_tweet)
 
