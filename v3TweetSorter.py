@@ -82,8 +82,26 @@ for tweetIndex in range(len(tweets_df['text'])):
                     df_subAfrica.append(tweets_df.iloc[[tweetIndex]])
 
 # Sort each dataframe by id so it's in order of newest to oldest tweets
-# reset the dataframe indices
+df_americas = df_americas.sort_values(['id'])
+df_centralAsia = df_centralAsia.sort_values(['id'])
+df_eastAsia = df_eastAsia.sort_values(['id'])
+df_europe = df_europe.sort_values(['id'])
+df_indianSub = df_indianSub.sort_values(['id'])
+df_MENA = df_MENA.sort_values(['id'])
+df_pacific = df_pacific.sort_values(['id'])
+df_southAsia = df_southAsia.sort_values(['id'])
+df_subAfrica = df_subAfrica.sort_values(['id'])
 
+# reset the dataframe indices
+df_americas = df_americas.reset_index()
+df_centralAsia = df_centralAsia.reset_index()
+df_eastAsia = df_eastAsia.reset_index()
+df_europe = df_europe.reset_index()
+df_indianSub = df_indianSub.reset_index()
+df_MENA = df_MENA.reset_index()
+df_pacific = df_pacific.reset_index()
+df_southAsia = df_southAsia.reset_index()
+df_subAfrica = df_subAfrica.reset_index()
 
 
     
