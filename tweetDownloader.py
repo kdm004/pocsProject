@@ -12,6 +12,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import string
 import time
+from fuzzywuzzy import fuzz
+#-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
 # Store bearer_token in variable
@@ -22,91 +24,85 @@ query = ' ("send them back to" OR "send him back to" OR "send her back to" OR "i
 # Replace with time period of your choice
 start_time = '2010-04-06T00:00:00Z' 
 # Replace with time period of your choice
-end_time = '2022-12-03T00:00:00Z' 
+end_time = '2022-12-05T00:00:00Z' 
 tweets = tweepy.Paginator(client.search_all_tweets, query=query,
-                              tweet_fields=['created_at'], start_time = start_time, end_time = end_time, max_results=100).flatten(limit=1000)
+                              tweet_fields=['created_at'], start_time = start_time, end_time = end_time, max_results=10).flatten(limit=10)
 #-------------------------------------------------------------------------------------------------------------------------------
-# Clean tweets
 
-#HappyEmoticons
-emoticons_happy = set([
-    ':-)', ':)', ';)', ':o)', ':]', ':3', ':c)', ':>', '=]', '8)', '=)', ':}',
-    ':^)', ':-D', ':D', '8-D', '8D', 'x-D', 'xD', 'X-D', 'XD', '=-D', '=D',
-    '=-3', '=3', ':-))', ":'-)", ":')", ':*', ':^*', '>:P', ':-P', ':P', 'X-P',
-    'x-p', 'xp', 'XP', ':-p', ':p', '=p', ':-b', ':b', '>:)', '>;)', '>:-)',
-    '<3'
-    ])
-
-# Sad Emoticons
-emoticons_sad = set([
-    ':L', ':-/', '>:/', ':S', '>:[', ':@', ':-(', ':[', ':-||', '=L', ':<',
-    ':-[', ':-<', '=\\', '=/', '>:(', ':(', '>.<', ":'-(", ":'(", ':\\', ':-c',
-    ':c', ':{', '>:\\', ';('
-    ])
-
-#Emoji patterns, don't remove them, just define them?
-emoji_pattern = re.compile("["
-         u"\U0001F600-\U0001F64F"  # emoticons
-         u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-         u"\U0001F680-\U0001F6FF"  # transport & map symbols
-         u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-         u"\U00002702-\U000027B0"
-         u"\U000024C2-\U0001F251"
-         "]+", flags=re.UNICODE)
-
-#combine sad and happy emoticons
-emoticons = emoticons_happy.union(emoticons_sad)
-
-def clean_tweets(tweet):     
-    stop_words = set(stopwords.words('english'))
-    word_tokens = word_tokenize(tweet)
-    #after tweepy preprocessing the colon symbol left remain after removing mentions
-    tweet = re.sub(r':', '', tweet)
-    tweet = re.sub(r'‚Ä¶', '', tweet)
-    #replace consecutive non-ASCII characters with a space
-    tweet = re.sub(r'[^\x00-\x7F]+',' ', tweet)
-    #remove emojis from tweet
-    tweet = emoji_pattern.sub(r'', tweet)
-    #filter using NLTK library append it to a string
-    filtered_tweet = [w for w in word_tokens]    #   filtered_tweet = [w for w in word_tokens if not w in stop_words]
-    filtered_tweet = []
-    #looping through conditions
-    for w in word_tokens:
-        #check tokens against stop words , emoticons and punctuations
-        if  w not in emoticons and w not in string.punctuation:    #        if w not in stop_words and w not in emoticons and w not in string.punctuation: (Doesn't work well.)
-            filtered_tweet.append(w)
-    fresh_tweet = ' '.join(filtered_tweet)
-
-    return fresh_tweet
 #-------------------------------------------------------------------------------------------------------------------------------
 # Append tweet information to lists
 sentiment_list = []
 id_list = []
 created_at_list = []
-text_list = []
+tweet_list = []
 for tweet in tweets:
     sentiment_list.append('0')
     id_list.append(tweet.id)
     created_at_list.append(tweet.created_at)
-    text_list.append(tweet.text)
+    tweet_list.append(tweet.text)
     time.sleep(1)
 
+
+# Read in 'Country' and 'Region' file as a dataframe
+globe_df = pd.read_csv('fuzzyCountriesAndRegions.csv')
+
 # Append clean Tweets to a list by calling method on each one                                       # DON'T CLEAN TWEETS UNTIL END? Don't take out stopwords for when you evaluate the tweet.
-clean_tweet_list = []
-for entry in text_list:
-    clean_tweet_list.append(clean_tweets(entry))
+# tweetsWithNames = []
+
+tweet_dic = {'sentiment':sentiment_list, 'id':id_list, 'date':created_at_list, 'text':tweet_list} # changed to text_list from clean_tweet_list
+df_tweets = pd.DataFrame(tweet_dic, columns = ['sentiment','id','date','text'])
+
+# initialize dataframe filtered for tweets with country or region names mentioned
+df_tweetsWithNames = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
+
+for tweetIndex in range(len(df_tweets)):
+    word_tokens = word_tokenize(df_tweets['text'][tweetIndex])      # tokenize tweet
+    for token in word_tokens:               # for each token
+        for name in globe_df['Country']:
+            fuzzRatio = fuzz.token_set_ratio(token, name)
+            if fuzzRatio >= .90:
+                df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])
+
+
+# for sentenceIndex in range(len(df_sentences['sentence'])):
+#     word_tokens = word_tokenize(df_sentences['sentence'][sentenceIndex])    # tokenize the sentence
+#     for token in word_tokens:        # for each token
+#         for name in df_names['name']:  # for each name
+#         #if word == 'kevin':
+#             ratio = fuzz.token_set_ratio(token, name)      # compare ratio of token to name
+#             if ratio >= 90:                                                        # add sentence to list if it contains a name within the name dataframe (Only kevin)
+#                 df_empty = df_empty.append(df_sentences.iloc[[sentenceIndex]])                 
+
+
+
+# Sort Tweets by newest to oldest      (Oldest 1000 tweets as a train/test dataset. The rest will be our unevaluated data)
+df_tweetsWithNames.sort_values('id')
+
+
+# Convert df_tweetsWithNames to csv file
+df_tweetsWithNames.to_csv('trainingTweetsWithNames.csv', index = False)
+
+
+
+
+
+
+
+
+
+
 
 #-------------------------------------------------------------------------------------------------------------------------------
 # Put lists in a dictionary
-tweet_dic = {'sentiment':sentiment_list, 'id':id_list, 'date':created_at_list, 'text':clean_tweet_list}
-# Convert dictionary to dataframe
-df = pd.DataFrame(tweet_dic, columns = ['sentiment','id','date','text'])
+# tweet_dic = {'sentiment':sentiment_list, 'id':id_list, 'date':created_at_list, 'text':tweetsWithNames} # changed to text_list from clean_tweet_list
+# # Convert dictionary to dataframe
+# df = pd.DataFrame(tweet_dic, columns = ['sentiment','id','date','text'])
 
-print(df)
-df.sort_values('id')                                                       # Sorting by id will also sort from newest to oldest
-print('--------------------HelloThere!---------------------')
-print(df)
-df.to_csv('trainingTweets.csv', index = False)  
+# print(df)
+# df.sort_values('id')                                                       # Sorting by id will also sort from newest to oldest
+# print('--------------------HelloThere!---------------------')
+# print(df)
+# df.to_csv('trainingTweetsHELLO.csv', index = False)  
 
 #-------------------------------------------------------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------------------------------------------------------

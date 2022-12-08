@@ -1,0 +1,536 @@
+Country,Region
+Andorra,Europe
+Andorran,Europe
+Andorrano,Europe
+United Arab Emirates,Middle east
+Arab,Middle east
+Arab Emirates,Middle east
+UAE,Middle east
+u.a.e.,Middle east
+Afghanistan,Asia & Pacific
+Afghani,Asia & Pacific
+Afghan,Asia & Pacific
+Antigua and Barbuda,South/Latin America
+Antigua,South/Latin America
+Barbuda,South/Latin America
+Anguilla,South/Latin America
+Anguillian,South/Latin America
+Albania,Europe
+Albanian,Europe
+Armenia,Europe
+Armenian,Europe
+Netherlands Antilles,Europe
+Holland,Europe
+Deutch,Europe
+Angola,Africa
+Angolian,Africa
+Antarctica,Asia & Pacific
+Antarctican,Asia & Pacific
+Argentina,South/Latin America
+Argentinian,South/Latin America
+American Samoa,Asia & Pacific
+Samoa,Asia & Pacific
+Samoan,Asia & Pacific
+Hawaii,Asia & Pacific
+Hawaiian,Asia & Pacific
+Austria,Europe
+Austrian,Europe
+Australia,Asia & Pacific
+Australian,Asia & Pacific
+Aussie,Asia & Pacific
+Aruba,South/Latin America
+Aruban,South/Latin America
+Azerbaijan,Asia & Pacific
+Azerbaijani,Asia & Pacific
+Bosnia and Herzegovina,Europe
+Bosnia,Europe
+Bosnian,Europe
+Herzegovinian,Europe
+Barbados,South/Latin America
+Barbadian,South/Latin America
+Bangladesh,Asia & Pacific
+Bangladeshi,Asia & Pacific
+Belgium,Europe
+Belgian,Europe
+Burkina Faso,Africa
+Burkina,Africa
+Burkinese,Africa
+Bulgaria,Europe
+Bulgarian,Europe
+Bahrain,Arab States
+Bahraini,Arab States
+Burundi,Africa
+Benin,Africa
+Bermuda,South/Latin America
+Bermudian,South/Latin America
+Brunei Darussalam,Asia & Pacific
+Brunei,Asia & Pacific
+Bruneian,Asia & Pacific
+Bolivia,South/Latin America
+Bolivian,South/Latin America
+Brazil,South/Latin America
+Brazilian,South/Latin America
+Bahamas,South/Latin America
+Bahamian,South/Latin America
+Bhutan,Asia & Pacific
+Bhutanese,Asia & Pacific
+Bouvet Island,South/Latin America
+Bouvet Islanders,South/Latin America
+Bouvet,South/Latin America
+Botswana,Africa
+Botswanian,Africa
+Belarus,Europe
+Belarusian,Europe
+Belize,South/Latin America
+Belizean,South/Latin America
+Canada,North America
+Canadian,North America
+Cocos (Keeling) Islands,Asia & Pacific
+Cocos Islander,Asia & Pacific
+Keeling Islander,Asia & Pacific
+Cocos,Asia & Pacific
+Cocos Malays,Asia & Pacific
+Keeling,Asia & Pacific
+The Democratic Republic of the Congo,Africa
+Congolese,Africa
+DRC,Africa
+D.R.C.,Africa
+Congo,Africa
+Central African Republic,Africa
+CAR,Africa
+African,Africa
+Switzerland,Europe
+Swiss,Europe
+Cote D'Ivoire,Africa
+Cote Divoire,Africa
+Ivory Coast,Africa
+Akan,Africa
+Mande,Africa
+Gur,Africa
+Cook Islands,Asia & Pacific
+Cook Islanders,Asia & Pacific
+Chile,South/Latin America
+Cameroon,Africa
+Cameroonian,Africa
+China,Asia & Pacific
+Chinese,Asia & Pacific
+Colombia,South/Latin America
+Colombian,South/Latin America
+Costa Rica,South/Latin America
+Costa Rican,South/Latin America
+Cuba,South/Latin America
+Cuban,South/Latin America
+Cape Verde,Africa
+Cape Verdeans,Africa
+Cabo Verdeans,Africa
+Christmas Island,Asia & Pacific
+Christmas Islander,Asia & Pacific
+Cyprus,Europe
+Crypriots,Europe
+Czech Republic,Europe
+Czech,Europe
+Germany,Europe
+German,Europe
+Djibouti,Arab States
+Djiboutians,Arab States
+Denmark,Europe
+Danish,Europe
+Dominica,South/Latin America
+Dominican Republic,South/Latin America
+Dominican Republic,South/Latin America
+Algeria,Arab States
+Algerian,Arab States
+Ecuador,South/Latin America
+Ecuadorian,South/Latin America
+Estonia,Europe
+Estonian,Europe
+Egypt,Middle east
+Egyptian,Middle east
+Western Sahara,Africa
+Sahrawi,Africa
+Eritrea,Africa
+Eritrean,Africa
+Spain,Europe
+Spaniards,Europe
+Spanish,Europe
+Ethiopia,Africa
+Ethiopian,Africa
+Finland,Europe
+Finnish,Europe
+Fiji,Asia & Pacific
+Fijians,Asia & Pacific
+Falkland Islands (Malvinas),South/Latin America
+Falkland Islander,South/Latin America
+Falkland,South/Latin America
+Malvinas,South/Latin America
+Malvinian,South/Latin America
+"Micronesia, Federated States of",Asia & Pacific
+Micronesian,Asia & Pacific
+Faroe Islands,Europe
+Faroe,Europe
+Faroe Islanders,Europe
+France,Europe
+French,Europe
+Gabon,Africa
+Gabonese,Africa
+United Kingdom,Europe
+U.K.,Europe
+UK,Europe
+England,Europe
+English,Europe
+Scotland,Europe
+Scottish,Europe
+Wales,Europe
+Welsh,Europe
+Britain,Europe
+British,Europe
+Grenada,South/Latin America
+Grenadian,South/Latin America
+Georgia,Europe
+Georgian,Europe
+French Guiana,South/Latin America
+Guianese,South/Latin America
+Ghana,Africa
+Ghanaian,Africa
+Gibraltar,Europe
+Gibraltarian,Europe
+Llanitos,Europe
+Greenland,Europe
+Greenlandic,Europe
+Gambia,Africa
+Gambian,Africa
+Guinea,Africa
+Guadeloupe,South/Latin America
+Guadeloupean,South/Latin America
+Equatorial Guinea,Africa
+Greece,Europe
+Greek,Europe
+South Georgia and the South Sandwich Islands,South/Latin America
+Guatemala,South/Latin America
+Guatemalans,South/Latin America
+Guam,Asia & Pacific
+Guamanian,Asia & Pacific
+Guinea-Bissau,Africa
+Bissau,Africa
+Guyana,South/Latin America
+Guyanese,South/Latin America
+Hong Kong,Asia & Pacific
+Heard Island and McDonald Islands,Asia & Pacific
+Honduras,South/Latin America
+Hondurian,South/Latin America
+Croatia,Europe
+Croatian,Europe
+Haiti,South/Latin America
+Haitian,South/Latin America
+Hungary,Europe
+Hungarian,Europe
+Indonesia,Asia & Pacific
+Indonesian,Asia & Pacific
+Ireland,Europe
+Irish,Europe
+Israel,Middle east
+Israeli,Middle east
+India,Asia & Pacific
+Indian,Asia & Pacific
+British Indian Ocean Territory,Asia & Pacific
+Iraq,Middle east
+Iraqi,Middle east
+Islamic Republic of Iran,Middle east
+Iran,Middle east
+Iranian,Middle east
+Iceland,Europe
+Icelandic,Europe
+Italy,Europe
+Italians,Europe
+Jamaica,South/Latin America
+Jamaican,South/Latin America
+Jordan,Middle east
+Jordanian,Middle east
+Japan,Asia & Pacific
+Japanese,Asia & Pacific
+Kenya,Africa
+Kenyan,Africa
+Kyrgyzstan,Asia & Pacific
+Kyrgyz,Asia & Pacific
+Cambodia,Asia & Pacific
+Cambodian,Asia & Pacific
+Kiribati,Asia & Pacific
+Comoros,Arab States
+Comorosian,Arab States
+Saint Kitts and Nevis,South/Latin America
+Democratic People's Republic of Korea,Asia & Pacific
+South Korea,Asia & Pacific
+South Korean,Asia & Pacific
+S Korea,Asia & Pacific
+S. Korea,Asia & Pacific
+Korean,Asia & Pacific
+Republic of Korea,Asia & Pacific
+North Korea,Asia & Pacific
+Korea,Asia & Pacific
+Kuwait,Middle east
+Kuwaiti,Middle east
+Cayman Islands,South/Latin America
+Kazakhstan,Asia & Pacific
+Kazakh,Asia & Pacific
+Lao People's Democratic Republic,Asia & Pacific
+Lebanon,Middle east
+Lebanese,Middle east
+Saint Lucia,South/Latin America
+Liechtenstein,Europe
+Sri Lanka,Asia & Pacific
+Sri Lankan,Asia & Pacific
+Liberia,Africa
+Liberia,Africa
+Lesotho,Africa
+Basotho,Africa
+Mosotho,Africa
+Lithuania,Europe
+Lithuanian,Europe
+Luxembourg,Europe
+Luxembourgian,Europe
+Latvia,Europe
+Latvian,Europe
+Libya,Middle east
+Libyan,Middle east
+Morocco,Arab States
+Moroccan,Arab States
+Monaco,Europe
+Monegasque,Europe
+Republic of Moldova,Europe
+Moldova,Europe
+Moldovian,Europe
+Madagascar,Africa
+Madagascarian,Europe
+Marshall Islands,Asia & Pacific
+Macedonia,Europe
+Macedonian,Europe
+Mali,Africa
+Myanmar,Asia & Pacific
+Myanmarese,Asia & Pacific
+Mongolia,Asia & Pacific
+Mongolian,Asia & Pacific
+Macau,Asia & Pacific
+Northern Mariana Islands,Asia & Pacific
+Mariana,Asia & Pacific
+Martinique,South/Latin America
+Mauritania,Arab States
+Mauritanian,Arab States
+Montserrat,South/Latin America
+Montserratian,South/Latin America
+Malta,Europe
+Maltese,Europe
+Mauritius,Africa
+Mauritian,Africa
+Maldives,Asia & Pacific
+Maldivian,Asia & Pacific
+Malawi,Africa
+Malawian,Africa
+Mexico,South/Latin America
+Mexican,South/Latin America
+Malaysia,Asia & Pacific
+Malasian,Asia & Pacific
+Mozambique,Africa
+Mozambican,Africa
+Namibia,Africa
+Namibian,Africa
+New Caledonia,Asia & Pacific
+New Caledonian,Asia & Pacific
+Niger,Africa
+Nigerien,Africa
+Norfolk Island,Asia & Pacific
+Norfolkian,Asia & Pacific
+Nigeria,Africa
+Nigerian,Africa
+Nicaragua,South/Central America
+Nicaraguan,South/Central America
+Norway,Europe
+Norwegian,Europe
+Nepal,Asia & Pacific
+Nepali,Asia & Pacific
+Nauru,Asia & Pacific
+Nauruan,Asia & Pacific
+Niue,Asia & Pacific
+Niuean,Asia & Pacific
+New Zealand,Asia & Pacific
+New Zealander,Asia & Pacific
+Zealand,Asia & Pacific
+Zealander,Asia & Pacific
+Oman,Middle east
+Omani,Middle east
+Panama,South/Latin America
+Panamanian,South/Latin America
+Peru,South/Latin America
+Peruvian,South/Latin America
+French Polynesia,Asia & Pacific
+Polynesia,Asia & Pacific
+Polynesian,Asia & Pacific
+Papua New Guinea,Asia & Pacific
+Papua,Asia & Pacific
+Philippines,Asia & Pacific
+Filipino,Asia & Pacific
+Pakistan,Asia & Pacific
+Pakistani,Asia & Pacific
+Poland,Europe
+Polish,Europe
+Saint Pierre and Miquelon,North America
+Saint Pierre,North America
+Miquelon,North America
+Pitcairn Islands,Asia & Pacific
+Pitcairn,Asia & Pacific
+Puerto Rico,South/Latin America
+Puerto Rican,South/Latin America
+Puertorican,South/Latin America
+Palestinian Territory,Arab States
+Palestine,Arab States
+Palestinian,Arab States
+Portugal,Europe
+Portuguese,Europe
+Palau,Asia & Pacific
+Palauan,Asia & Pacific
+Paraguay,South/Latin America
+Qatar,Middle east
+Qatari,Middle east
+Reunion,Asia & Pacific
+Reunionese,Asia & Pacific
+Romania,Europe
+Romanian,Europe
+Russian Federation,Europe
+Russia,Europe
+Russian,Europe
+Rwanda,Africa
+Rwandan,Africa
+Saudi Arabia,Middle east
+Saudi,Middle east
+Arabia,Middle east
+Arab,Middle east
+Saudi Arabian,Middle east
+Arabian,Middle east
+Solomon Islands,Asia & Pacific
+Solomon Islander,Asia & Pacific
+Seychelles,Africa
+Seychellois,Africa
+South Sudan,Africa
+South Sudanese,Africa
+Sudan,Arab States
+Sudanese,Arab States
+Sweden,Europe
+Swedish,Europe
+Singapore,Asia & Pacific
+Singaporean,Asia & Pacific
+Saint Helena,Africa
+Slovenia,Europe
+Slovenian,Europe
+Svalbard and Jan Mayen,Europe
+Svalbard,Europe
+Jan Mayen,Europe
+Slovakia,Europe
+Slovak,Europe
+Sierra Leone,Africa
+Sierra Leonean,Africa
+San Marino,Europe
+San Marinoan,Europe
+Senegal,Africa
+Senegalese,Africa
+Somalia,Arab States
+Somalian,Arab States
+Suriname,South/Latin America
+Surinamese,South/Latin America
+Sao Tome and Principe,Africa
+Sao Tome ,Africa
+Principe,Africa
+El Salvador,South/Latin America
+Salvadorian,South/Latin America
+Syrian Arab Republic,Asia & Pacific
+Syria,Asia & Pacific
+Syrian Arab Republic,Asia & Pacific
+Eswatini,Africa
+Eswatinian,Africa
+Turks and Caicos Islands,South/Latin America
+Chad,Africa
+Chadian,Africa
+French Southern Territories,Asia & Pacific
+Togo,Africa
+Togolese,Africa
+Thailand,Asia & Pacific
+Thai,Asia & Pacific
+Tajikistan,Asia & Pacific
+Tajik,Asia & Pacific
+Tokelau,Asia & Pacific
+Tokelauan,Asia & Pacific
+Turkmenistan,Asia & Pacific
+Turkmenistani,Asia & Pacific
+Tunisia,Arab States
+Tunisian,Arab States
+Tonga,Asia & Pacific
+Tongalese,Asia & Pacific
+Timor-Leste,Asia & Pacific
+Turkey,Europe
+Turkish,Europe
+Trinidad and Tobago,South/Latin America
+Trinidad,South/Latin America
+Tobago,South/Latin America
+Trinidadian,South/Latin America
+Tobagonian,South/Latin America
+Tuvalu,Asia & Pacific
+Tuvaluan,Asia & Pacific
+Taiwan,Asia & Pacific
+Taiwanese,Asia & Pacific
+United Republic of Tanzania,Africa
+Tanzanian,Africa
+Ukraine,Europe
+Ukrainian,Europe
+Uganda,Africa
+Ugandan,Africa
+Uruguay,South/Latin America
+Uruguayan,South/Latin America
+Uzbekistan,Asia & Pacific
+Uzbekistani,Asia & Pacific
+Holy See (Vatican City State),Europe
+Holy See,Europe
+Saint Vincent and the Grenadines,South/Latin America
+Saint Vincent,South/Latin America
+Vincentians,South/Latin America
+Venezuela,South/Latin America
+Venezuelan,South/Latin America
+British Virgin Islands,South/Latin America
+Virgin Islander,South/Latin America
+U.S. Virgin Islands,South/Latin America
+Virgin Islands,South/Latin America
+Vietnam,Asia & Pacific
+Vietnamese,Asia & Pacific
+Vanuatu,Asia & Pacific
+Vanuatuan,Asia & Pacific
+Wallis and Futuna,Asia & Pacific
+Wallis,Asia & Pacific
+Futuna,Asia & Pacific
+Wallisian,Asia & Pacific
+Futunan,Asia & Pacific
+Samoa,Asia & Pacific
+Samoan,Asia & Pacific
+Yemen,Middle east
+Yemeni,Middle east
+Yemenite,Middle east
+Mayotte,Africa
+Mahoran,Africa
+Serbia,Europe
+Serbian,Europe
+South Africa,Africa
+South African,Africa
+Zambia,Africa
+Zambian,Africa
+Montenegro,Europe
+Montenegrin,Europe
+Zimbabwe,Africa
+Zimbabean,Africa
+Aland Islands,Europe
+Alander,Europe
+Guernsey,Europe
+Guernsyman,Europe
+Isle of Man,Europe
+Manx,Europe
+Jersey,Europe
+Jersian,Europe
+Saint Barthelemy,South/Latin America
+Barthelemois,South/Latin America
+Saint Martin,South/Latin America
+Saint Martinois,South/Latin America

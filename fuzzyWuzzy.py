@@ -3,5 +3,8 @@ from fuzzywuzzy import process
 
 
 
-iran = fuzz.ratio("bosnia Herzegovina", "bosnia herz")
-print(iran)
+ratio = fuzz.token_set_ratio("DougBookwriter2", "Andorran")
+print(ratio)
+
+
+

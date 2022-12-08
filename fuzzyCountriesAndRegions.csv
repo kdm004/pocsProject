@@ -80,8 +80,8 @@ Belarus,Europe
 Belarusian,Europe
 Belize,Americas
 Belizean,Americas
-Canada,North America
-Canadian,North America
+Canada,Americas
+Canadian,Americas
 Cocos (Keeling) Islands,East Asia
 Cocos Islander,East Asia
 Keeling Islander,East Asia
@@ -370,14 +370,16 @@ Pakistan,Indian Subcontinent
 Pakistani,Indian Subcontinent
 Poland,Europe
 Polish,Europe
-Saint Pierre and Miquelon,North America
-Saint Pierre,North America
-Miquelon,North America
+Saint Pierre and Miquelon,Americas
+Saint Pierre,Americas
+Miquelon,Americas
 Pitcairn Islands,Pacific
 Pitcairn,Pacific
 Puerto Rico,Americas
 Puerto Rican,Americas
 Puertorican,Americas
+Puerto, Americas
+Rico, Americas
 Palestinian Territory,MENA
 Palestine,MENA
 Palestinian,MENA

@@ -10,9 +10,11 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import string
 
-# Read files
-globe_df = pd.read_csv('countriesAndRegions.csv')
-tweets_df = pd.read_csv('trainingTweets.csv')
+# Read in files to dataFrames
+globe_df = pd.read_csv('fuzzyCountriesAndRegions.csv')
+tweets_df = pd.read_csv('trainingTweetsHalf1.csv')
+tweets_df = pd.read_csv('trainingTweetsHalf2.csv')
+
 
 # Filter tweets for those that contain mentions of countries
 vals=globe_df.stack().to_list()

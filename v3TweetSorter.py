@@ -43,7 +43,7 @@ df_southAsia = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
 df_subAfrica = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
 #--------------------------------------------------------------------------------------------
 
-# For each tweet, get the substrings and...
+# For each tweet, get the substrings and...        # might want to get word tokens instead of substrings::::     word_tokens = word_tokenize(tweet)
 for tweetIndex in range(len(tweets_df['text'])):
     list_of_substrings = [tweets_df['text'][tweetIndex][i: j] for i in range(len(tweets_df['text'][tweetIndex]))        # Overwrite list_of_substrings with substrings of next Tweet
           for j in range(i + 1, len(tweets_df['text'][tweetIndex]) + 1)]
