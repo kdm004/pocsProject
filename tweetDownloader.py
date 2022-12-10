@@ -115,11 +115,11 @@ for tweetIndex in range(len(df_tweets)):
         if 'Pacific' in entry:
             df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])         # Add tweetinfo of tweets with Pacific mentions
 
-df_tweetsWithNames = df_tweetsWithNames.reset_index()                                            # Reset df_tweetsWithNames index
+#df_tweetsWithNames = df_tweetsWithNames.reset_index()                                            # Reset df_tweetsWithNames index
 df_tweetsWithNames = df_tweetsWithNames.drop_duplicates()                                        # Drop duplicate entries
 df_tweetsWithNames = df_tweetsWithNames.sort_values('id')                                        # sort tweets from newest to oldest by using the id.... Larger value means newer
 
-df_tweetsWithNames.to_csv('trainingTweetsWithNames.csv', index = False)                          # Writing df_tweetsWithNames to a csv
+df_tweetsWithNames.to_csv('xxxGeoTextDownloader.csv', index = False)                          # Writing df_tweetsWithNames to a csv
 
 
 
