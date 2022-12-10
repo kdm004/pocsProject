@@ -12,7 +12,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import string
 import time
-from fuzzywuzzy import fuzz
+#from fuzzywuzzy import fuzz    No longer used. Geotext replaces this. 
+from geotext import GeoText
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -43,44 +44,115 @@ for tweet in tweets:
     time.sleep(1)
 
 
-# Read in 'Country' and 'Region' file as a dataframe
-globe_df = pd.read_csv('fuzzyCountriesAndRegions.csv')
 
-# Append clean Tweets to a list by calling method on each one                                       # DON'T CLEAN TWEETS UNTIL END? Don't take out stopwords for when you evaluate the tweet.
-# tweetsWithNames = []
+cleaned_tweet_list = []
+for tweet in tweet_list:                                              # for each tweet  
+    tweet = tweet.lower()                                             # make it all lowercase
+    temp = re.sub(r'https.*|(?![0-9À-ÿa-z\s]).','', tweet)            # take out URLs
+    temp = re.sub(r'\s{2,}', ' ', temp)                               # clean up extra spaces
+    cleaned_tweet_list.append(temp)                                  
 
-tweet_dic = {'sentiment':sentiment_list, 'id':id_list, 'date':created_at_list, 'text':tweet_list} # changed to text_list from clean_tweet_list
+
+tweet_dic = {'sentiment':sentiment_list, 'id':id_list, 'date':created_at_list, 'text':cleaned_tweet_list} # changed to text_list from clean_tweet_list
 df_tweets = pd.DataFrame(tweet_dic, columns = ['sentiment','id','date','text'])
 
-# initialize dataframe filtered for tweets with country or region names mentioned
-df_tweetsWithNames = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
+
+
+
+# tweets_with_mentions = []
+# for tweet in cleaned_tweet_list:
+#     places = GeoText(tweet, aggressive = True).country_mentions         # get the regions mentioned
+    
+##     region_list = list(places.keys())    #needs double comments because it has the word region in it so pylance is being weird
+#  #   print(region_list)
+#     for entry in region_list:
+#         if 'Europe' in entry:
+#             tweets_with_mentions.append(tweet)
+#         if 'Latin America' in entry:
+#             tweets_with_mentions.append(tweet)
+#         if 'North America' in entry:
+#             tweets_with_mentions.append(tweet)
+#         if 'Indian Subcontinent' in entry:
+#             tweets_with_mentions.append(tweet)
+#         if 'Sub-Saharan Africa' in entry:
+#             tweets_with_mentions.append(tweet)
+#         if 'MENA' in entry:
+#             tweets_with_mentions.append(tweet)
+#         if 'East Asia' in entry:
+#             tweets_with_mentions.append(tweet)
+#         if 'Central Asia' in entry:
+#             tweets_with_mentions.append(tweet)
+#         if 'Pacific' in entry:
+#             tweets_with_mentions.append(tweet)
+# #print(tweets_with_mentions)
+
+df_tweetsWithNames = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])                  # initialize df_tweetsWithNames 
+
+
 
 for tweetIndex in range(len(df_tweets)):
-    word_tokens = word_tokenize(df_tweets['text'][tweetIndex])      # tokenize tweet
-    for token in word_tokens:               # for each token
-        for name in globe_df['Country']:
-            fuzzRatio = fuzz.token_set_ratio(token, name)
-            if fuzzRatio >= .90:
-                df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])
+    places = GeoText(df_tweets['text'][tweetIndex], aggressive = True).country_mentions         # get the regions mentioned
+
+    region_list = list(places.keys())
+    #   print(region_list)
+    for entry in region_list:
+        if 'Europe' in entry:
+            df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])         # Add tweetinfo of tweets with Europe mentions
+        if 'Latin America' in entry:
+            df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])         # Add tweetinfo of tweets with Latin America mentions
+        if 'North America' in entry:
+            df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])         # Add tweetinfo of tweets with North America mentions
+        if 'Indian Subcontinent' in entry:
+            df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])         # Add tweetinfo of tweets with Indian Subcontinent mentions
+        if 'Sub-Saharan Africa' in entry:
+            df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])         # Add tweetinfo of tweets with Sub-Saharan Africa mentions
+        if 'MENA' in entry:
+            df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])         # Add tweetinfo of tweets with MENA mentions
+        if 'East Asia' in entry:
+            df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])         # Add tweetinfo of tweets with East Asia mentions
+        if 'Central Asia' in entry:
+            df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])         # Add tweetinfo of tweets with Europe mentions
+        if 'Pacific' in entry:
+            df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])         # Add tweetinfo of tweets with Pacific mentions
+
+df_tweetsWithNames = df_tweetsWithNames.reset_index()                                            # Reset df_tweetsWithNames index
+df_tweetsWithNames = df_tweetsWithNames.drop_duplicates()                                        # Drop duplicate entries
+df_tweetsWithNames = df_tweetsWithNames.sort_values('id')                                        # sort tweets from newest to oldest by using the id.... Larger value means newer
+
+df_tweetsWithNames.to_csv('trainingTweetsWithNames.csv', index = False)                          # Writing df_tweetsWithNames to a csv
 
 
-# for sentenceIndex in range(len(df_sentences['sentence'])):
-#     word_tokens = word_tokenize(df_sentences['sentence'][sentenceIndex])    # tokenize the sentence
-#     for token in word_tokens:        # for each token
-#         for name in df_names['name']:  # for each name
-#         #if word == 'kevin':
-#             ratio = fuzz.token_set_ratio(token, name)      # compare ratio of token to name
-#             if ratio >= 90:                                                        # add sentence to list if it contains a name within the name dataframe (Only kevin)
-#                 df_empty = df_empty.append(df_sentences.iloc[[sentenceIndex]])                 
+
+
+
+
+
+
+
+
+
+
+
+
+# # initialize dataframe filtered for tweets with country or region names mentioned
+# df_tweetsWithNames = pd.DataFrame(columns=['sentiment', 'id', 'date', 'text'])
+
+# for tweetIndex in range(len(df_tweets)):
+#     word_tokens = word_tokenize(df_tweets['text'][tweetIndex])      # tokenize tweet
+#     for token in word_tokens:               # for each token
+#         for name in globe_df['Country']:
+#             fuzzRatio = fuzz.token_set_ratio(token, name)
+#             if fuzzRatio >= .90:
+#                 df_tweetsWithNames = df_tweetsWithNames.append(df_tweets.iloc[[tweetIndex]])      
 
 
 
 # Sort Tweets by newest to oldest      (Oldest 1000 tweets as a train/test dataset. The rest will be our unevaluated data)
-df_tweetsWithNames.sort_values('id')
+# df_tweetsWithNames.sort_values('id')
 
 
-# Convert df_tweetsWithNames to csv file
-df_tweetsWithNames.to_csv('trainingTweetsWithNames.csv', index = False)
+# # Convert df_tweetsWithNames to csv file
+# df_tweetsWithNames.to_csv('trainingTweetsWithNames.csv', index = False)
 
 
 
