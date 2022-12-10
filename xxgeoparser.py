@@ -11,14 +11,15 @@ from geotext import GeoText
 # GeoText('New York, Texas, and also China').country_mentions
 # # OrderedDict([(u'US', 2), (u'CN', 1)])
 
-some_countries = []
-tweet_list=['hello my middle eastern canadian friends','hello my english pal']
+sentences_with_MENA = []
+tweet_list=['my friend is from a middle eastern country', 'hello my European friend', 'Hey, meet my friend from Laos']
 for tweet in tweet_list:
     places = GeoText(tweet, aggressive = True).country_mentions
-    #print(places)
-    some_countries.append(list(places.keys()))       # big list with a sublist for countries in each tweet
-
-print(some_countries)
+    places_list = list(places.keys())
+ #   print(places_list)
+    if 'MENA' in places_list:
+        sentences_with_MENA.append(tweet)
+print(sentences_with_MENA)
 
 # It's not perfect, but this is what we're going to use to filter tweets by country and region.
 # We're going to need to find out how to add "region" into it. Maybe we'll do that if we have time.
