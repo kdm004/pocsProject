@@ -23,11 +23,11 @@ client = tweepy.Client(bearer_token=bearer_token, wait_on_rate_limit=True)
 # Replace with your own search query
 query = ' ("send them back to" OR "send him back to" OR "send her back to" OR "illegals from" OR "illegal aliens from" OR "illegal alien from" OR "illegal immigrants from" OR "illegal immigrant from" OR "illegal criminals from" OR "illegal criminal from" OR "foreign criminals from" OR "foreign criminal from" OR "illegal terrorist from" OR "sending us their criminals" OR "ban people from" OR "deport them" OR "deport people from" OR "deport all these" OR "immigrants from" OR "invading our country" OR "being invaded" OR "invaders" OR "immigrants") place_country:US -is:retweet' 
 # Replace with time period of your choice
-start_time = '2010-04-06T00:00:00Z' 
+start_time = '2012-03-05T00:00:00Z' 
 # Replace with time period of your choice
-end_time = '2022-12-05T00:00:00Z' 
+end_time = '2022-12-05T00:00:00Z'
 tweets = tweepy.Paginator(client.search_all_tweets, query=query,
-                              tweet_fields=['created_at'], start_time = start_time, end_time = end_time, max_results=10).flatten(limit=10)
+                              tweet_fields=['created_at'], start_time = start_time, end_time = end_time, max_results=100).flatten(limit=550000)
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -41,14 +41,19 @@ for tweet in tweets:
     id_list.append(tweet.id)
     created_at_list.append(tweet.created_at)
     tweet_list.append(tweet.text)
-    time.sleep(1)
+    time.sleep(.02) # changed from 1 to .5, .15 seemed to work too. .04 seems to work too. .03 seems to work.
 
-
+# Save original tweets
+tweet_dic_original = {'sentiment':sentiment_list, 'id':id_list, 'date':created_at_list, 'text':tweet_list} # changed to text_list from clean_tweet_list
+df_tweets_original = pd.DataFrame(tweet_dic_original, columns = ['sentiment','id','date','text'])
+df_tweets_original.to_csv('originalTweets.csv')
 
 cleaned_tweet_list = []
 for tweet in tweet_list:                                              # for each tweet  
     tweet = tweet.lower()                                             # make it all lowercase
-    temp = re.sub(r'https.*|(?![0-9À-ÿa-z\s]).','', tweet)            # take out URLs
+    temp = re.sub(r'http\S+', '', tweet)                              # take out URLs
+    temp = re.sub(r'(@\S+) | (#\S+)', r'', temp)                      # take out @s and hashtags
+    temp = re.sub(r'https.*|(?![0-9À-ÿa-z\s]).','', temp)            # take out URLs
     temp = re.sub(r'\s{2,}', ' ', temp)                               # clean up extra spaces
     cleaned_tweet_list.append(temp)                                  
 
@@ -119,7 +124,7 @@ for tweetIndex in range(len(df_tweets)):
 df_tweetsWithNames = df_tweetsWithNames.drop_duplicates()                                        # Drop duplicate entries
 df_tweetsWithNames = df_tweetsWithNames.sort_values('id')                                        # sort tweets from newest to oldest by using the id.... Larger value means newer
 
-df_tweetsWithNames.to_csv('xxxGeoTextDownloader.csv', index = False)                          # Writing df_tweetsWithNames to a csv
+df_tweetsWithNames.to_csv('tweetSheetGeoText.csv', index = False)                          # Writing df_tweetsWithNames to a csv
 
 
 

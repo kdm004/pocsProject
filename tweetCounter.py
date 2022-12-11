@@ -17,7 +17,7 @@ client = tweepy.Client(bearer_token=bearer_token,wait_on_rate_limit = True) # cl
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 query = ' ("send them back to" OR "send him back to" OR "send her back to" OR "illegals from" OR "illegal aliens from" OR "illegal alien from" OR "illegal immigrants from" OR "illegal immigrant from" OR "illegal criminals from" OR "illegal criminal from" OR "foreign criminals from" OR "foreign criminal from" OR "illegal terrorist from" OR "sending us their criminals" OR "ban people from" OR "deport them" OR "deport people from" OR "deport all these" OR "immigrants from" OR "invading our country" OR "being invaded" OR "invaders" OR "immigrants") place_country:US -is:retweet' 
-start_time = '2010-04-06T00:00:00Z' # CHECK THE YEAR  #paginator will not activate until 31 days is passed. 
+start_time = '2012-03-05T00:00:00Z' # CHECK THE YEAR  #paginator will not activate until 31 days is passed. 
 end_time = '2022-12-05T00:00:00Z' # CHECK THE YEAR
 granularity = 'day'
 
@@ -27,7 +27,7 @@ counts = tweepy.Paginator(
         start_time=start_time,
         end_time=end_time,
         granularity=granularity) 
-time.sleep(1)
+time.sleep(.5)
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 
 
