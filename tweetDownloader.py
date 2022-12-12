@@ -124,7 +124,7 @@ for tweetIndex in range(len(df_tweets)):
 df_tweetsWithNames = df_tweetsWithNames.drop_duplicates()                                        # Drop duplicate entries
 df_tweetsWithNames = df_tweetsWithNames.sort_values('id')                                        # sort tweets from newest to oldest by using the id.... Larger value means newer
 
-df_tweetsWithNames.to_csv('tweetSheetGeoText.csv', index = False)                          # Writing df_tweetsWithNames to a csv
+df_tweetsWithNames.to_csv('dec11Tweets.csv', index = False)                          # Writing df_tweetsWithNames to a csv
 
 
 
